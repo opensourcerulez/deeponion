@@ -2175,7 +2175,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
             CAmount txfee = 0;
             if (!Consensus::CheckTxInputs(tx, state, view, pindex->nHeight, txfee)) {
             	// bad tx, remove it from mempool (not activate for now)
-            	// mempool.removeRecursive(tx);
+            	mempool.removeRecursive(tx);
                 return error("%s: Consensus::CheckTxInputs: %s, %s", __func__, tx.GetHash().ToString(), FormatStateMessage(state));
             }
             nFees += txfee;
